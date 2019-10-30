@@ -28,6 +28,8 @@ private:
 
 	//True if hit landscape
 	bool GetSightRayHitLocation(FVector&) const;
+
+	bool GetLookDirection(FVector2D &CrosshairLocation, FVector &WorldDirection) const;
 	
 	UPROPERTY(EditAnywhere)
 		float CrosshairXLocation = 0.5;
