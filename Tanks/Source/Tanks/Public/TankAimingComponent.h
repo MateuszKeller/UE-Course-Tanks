@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Kismet/GameplayStatics.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/ActorComponent.h"
 #include "GameFramework/Actor.h"
@@ -18,6 +19,9 @@ public:
 	// Sets default values for this component's properties
 	UTankAimingComponent();
 
+	UPROPERTY(EditAnywhere)
+		bool bDrawDebugLine = true;
+
 	void SetBarrelReference(UStaticMeshComponent* BarrelToSet);
 
 protected:
@@ -28,7 +32,7 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	void AimAt(FVector WorldSpaceAim);
+	void AimAt(FVector WorldSpaceAim, float LaunchSpeed);
 
 private:
 	UStaticMeshComponent* Barrel = nullptr;
