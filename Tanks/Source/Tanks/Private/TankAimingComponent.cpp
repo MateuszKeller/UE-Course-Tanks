@@ -27,8 +27,8 @@ void UTankAimingComponent::AimAt(FVector WorldSpaceAim, float LaunchSpeed)
 	FVector OutLaunchVelocity(0);
 	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
 	bool bHaveAimSolution = UGameplayStatics::SuggestProjectileVelocity(this, OutLaunchVelocity, StartLocation,
-						WorldSpaceAim, LaunchSpeed, ESuggestProjVelocityTraceOption::DoNotTrace,
-						0, 0, ESuggestProjVelocityTraceOption::DoNotTrace, FCollisionResponseParams::DefaultResponseParam, TArray<AActor*>(), bDrawDebugLine);
+						WorldSpaceAim, LaunchSpeed, false, 0, 0, ESuggestProjVelocityTraceOption::DoNotTrace
+						,FCollisionResponseParams::DefaultResponseParam, TArray<AActor*>(), bDrawDebugLine);
 	// Calculate the OutLaunchVelocity
 	if(bHaveAimSolution)
 	{
@@ -49,6 +49,6 @@ void UTankAimingComponent::MoveBarrel(FVector AimDirection)
 
 	//UE_LOG(LogTemp, Warning, TEXT("Delta Rotation: %s"), *DeltaRotator.ToString());
 	//Move the Barrel
-	Barrel->Elevate(5);
+	Barrel->Elevate(DeltaRotator.Pitch);
 }
 
