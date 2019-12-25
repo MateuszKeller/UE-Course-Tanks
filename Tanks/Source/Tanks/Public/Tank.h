@@ -32,10 +32,14 @@ public:
 		void Fire();
 
 private:
+	//EditAnywhere - we can set property for every instance separately; EditDefaultsOnly - we can change property only for BP
 	UPROPERTY(EditAnywhere, Category = Firing)
 		float LaunchSpeed = 6000;
 
-	UPROPERTY(EditAnywhere, Category = Setup)
+	UPROPERTY(EditAnywhere, Category = Firing)
+	float ReloadTimeInS = 3;
+
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
 		TSubclassOf<AProjectile> ProjectileBP;
 
 	UTankBarrel* Barrel = nullptr;
@@ -50,7 +54,4 @@ protected:
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
 	double LastFireTime = 0;
-	float ReloadTimeInS = 3;
-	
-
 };

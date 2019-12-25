@@ -21,7 +21,7 @@ public:
 	// Sets default values for this component's properties
 	UTankAimingComponent();
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 		bool bDrawDebugLine = false;
 
 	void SetBarrelReference(UTankBarrel* BarrelToSet);

@@ -15,7 +15,6 @@ AProjectile::AProjectile()
 
 void AProjectile::LaunchProjectile(float Speed)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Fire in a hole at %f"), Speed);
 	MovementComponent->SetVelocityInLocalSpace(FVector::ForwardVector * Speed);
 	MovementComponent->Activate();
 }

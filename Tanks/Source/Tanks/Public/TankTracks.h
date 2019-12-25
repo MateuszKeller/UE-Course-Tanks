@@ -4,20 +4,22 @@
 
 #include "CoreMinimal.h"
 #include "Components/StaticMeshComponent.h"
-#include "TankTurret.generated.h"
+#include "TankTracks.generated.h"
 
 /**
- * 
+ * TankTrack is used to set maximum driving force, and to apply forces to the tank.
  */
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
-class TANKS_API UTankTurret : public UStaticMeshComponent
+class TANKS_API UTankTracks : public UStaticMeshComponent
 {
 	GENERATED_BODY()
-	
+
 public:
-	void Rotate(float RelativeSpeed);
+
+	UFUNCTION(BlueprintCallable, Category = Input)
+		void SetThrottle(float Throttle);
+
 
 private:
-	UPROPERTY(EditDefaultsOnly, Category = Setup)
-		float MaxDegreesPerSecond = 29;
+	
 };
