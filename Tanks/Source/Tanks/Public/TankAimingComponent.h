@@ -22,7 +22,7 @@ public:
 	UTankAimingComponent();
 
 	UPROPERTY(EditAnywhere)
-		bool bDrawDebugLine = true;
+		bool bDrawDebugLine = false;
 
 	void SetBarrelReference(UTankBarrel* BarrelToSet);
 	void SetTurretReference(UTankTurret* TurretToSet);

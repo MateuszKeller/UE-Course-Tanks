@@ -48,6 +48,9 @@ protected:
 	virtual void BeginPlay() override;
 
 	UTankAimingComponent* TankAimingComponent = nullptr;
+
+	double LastFireTime = 0;
+	float ReloadTimeInS = 3;
 	
 
 };
