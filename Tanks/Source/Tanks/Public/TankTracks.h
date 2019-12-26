@@ -21,7 +21,7 @@ public:
 
 	//Max Force Per Tack (Newtons)
 	UPROPERTY(EditDefaultsOnly)
-		float TrackMaxDrivingFroce = 400000; //40t tank and 1g acceleration
+		float TrackMaxDrivingFroce = 32000000; //40 000 000 for driffting 
 
 
 private:
