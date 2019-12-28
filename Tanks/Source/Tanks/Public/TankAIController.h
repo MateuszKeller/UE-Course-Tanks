@@ -22,4 +22,7 @@ public:
 private:
 	ATank* GetControlledTank() const;
 	ATank* GetPlayerTank() const;
+
+	UPROPERTY(EditDefaultsOnly)
+	float AcceptanceRadius = 3000.f;
 };
