@@ -25,7 +25,13 @@ void UTankMovementComponent::IntendTurnRight(float Throw)
 
 void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed)
 {
-	auto TankName = GetOwner()->GetName();
-	
-	UE_LOG(LogTemp, Warning, TEXT("%s vectoring to %s."), *(TankName), *(MoveVelocity.ToString()))
+	auto TankCurrentForward = GetOwner()->GetActorForwardVector().GetSafeNormal(); // Vector Tank is currently facing
+	auto AIForwardIntention = MoveVelocity.GetSafeNormal(); // Vector AI woud like to be headed
+
+	float ForwardThrow = FVector::DotProduct(TankCurrentForward, AIForwardIntention);
+	IntendMoveForward(ForwardThrow);
+
+	float RightThrow = FVector::CrossProduct(TankCurrentForward, AIForwardIntention).Z;
+	IntendTurnRight(RightThrow);
+	//UE_LOG(LogTemp, Warning, TEXT("%s vectoring to %s."), *(GetOwner()->GetName()), *(MoveVelocity.GetSafeNormal().ToString()))
 }
