@@ -2,12 +2,10 @@
 
 #pragma once
 
-
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
 #include "TankPlayerController.generated.h"
 
-class ATank;
 class UTankAimingComponent;
 /**
  * 
@@ -27,8 +25,6 @@ protected:
 		void FoundAimingComponent(UTankAimingComponent* AimingCompRef);
 
 private:
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	ATank* GetControlledTank() const;
 
 	//Move the tank barrel so thaht shot would hit where the crosshair intersects the world
 	void AimTowardsCrosshaid();

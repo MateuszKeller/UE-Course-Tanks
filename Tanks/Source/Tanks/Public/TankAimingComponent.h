@@ -11,6 +11,7 @@
 
 class UTankBarrel; 
 class UTankTurret;
+class AProjectile;
 
 UENUM()
 enum class EFiringState: uint8
@@ -26,24 +27,40 @@ class TANKS_API UTankAimingComponent : public UActorComponent
 	GENERATED_BODY()
 
 public:	
-	// Sets default values for this component's properties
-	UTankAimingComponent();
-
+	
 	UFUNCTION(BlueprintCallable, Category = Setup)
 		void Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
 
 	UPROPERTY(EditDefaultsOnly)
 		bool bDrawDebugLine = false;
 
-	void AimAt(FVector WorldSpaceAim, float LaunchSpeed);
+	void AimAt(FVector WorldSpaceAim);
+
+	UFUNCTION(BlueprintCallable, Category = Firing)
+		void Fire();
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = Setup)
-		EFiringState FiringState = EFiringState::Reloading;
+		EFiringState FiringState = EFiringState::Aiming;
 
 private:
+	// Sets default values for this component's properties
+	UTankAimingComponent();
+
+	void Move(FVector AimDirection);
+
 	UTankBarrel* Barrel = nullptr;
 	UTankTurret* Turret = nullptr;
 
-	void Move(FVector AimDirection); 
+	//EditAnywhere - we can set property for every instance separately; EditDefaultsOnly - we can change property only for BP
+	UPROPERTY(EditAnywhere, Category = Firing)
+		float LaunchSpeed = 6000;
+
+	UPROPERTY(EditAnywhere, Category = Firing)
+		float ReloadTimeInS = 3;
+
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
+		TSubclassOf<AProjectile> ProjectileBP;
+	
+	double LastFireTime = 0;
 };
