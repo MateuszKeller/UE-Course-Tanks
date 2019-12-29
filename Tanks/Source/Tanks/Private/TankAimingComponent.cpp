@@ -16,6 +16,27 @@ UTankAimingComponent::UTankAimingComponent()
 	// ...
 }
 
+void UTankAimingComponent::BeginPlay()
+{
+	Super::BeginPlay();
+	LastFireTime = FPlatformTime::Seconds();
+}
+
+void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction * ThisTickFunction)
+{
+	if ((FPlatformTime::Seconds() - LastFireTime) < ReloadTimeInS)
+	{
+		FiringState = EFiringState::Reloading;
+	}
+	else if (isBarrelMoving())
+	{
+		FiringState = EFiringState::Aiming;
+	}
+	else
+	{
+		FiringState = EFiringState::Locked;
+	}
+}
 
 void UTankAimingComponent::Initialise(UTankBarrel * BarrelToSet, UTankTurret * TurretToSet)
 {
@@ -37,7 +58,7 @@ void UTankAimingComponent::AimAt(FVector WorldSpaceAim)
 	// Calculate the OutLaunchVelocity
 	if(bHaveAimSolution)
 	{
-		auto AimDirection = OutLaunchVelocity.GetSafeNormal(); // Turining to unit vector
+		AimDirection = OutLaunchVelocity.GetSafeNormal(); // Turining to unit vector
 		//UE_LOG(LogTemp, Warning, TEXT("%s is aiming at %s"), *(GetOwner()->GetName()), *AimDirection.ToString());
 		Move(AimDirection);
 	}
@@ -45,10 +66,9 @@ void UTankAimingComponent::AimAt(FVector WorldSpaceAim)
 
 void UTankAimingComponent::Fire()
 {
-	if (!ensure(Barrel && ProjectileBP)) return;
-	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInS;
-	if (isReloaded)
+	if (FiringState!= EFiringState::Reloading)
 	{
+		if (!ensure(Barrel && ProjectileBP)) return;
 
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBP,
 			Barrel->GetSocketLocation(FName("Projectile")),
@@ -56,7 +76,6 @@ void UTankAimingComponent::Fire()
 			);
 
 		Projectile->LaunchProjectile(LaunchSpeed);
-
 		LastFireTime = FPlatformTime::Seconds();
 	}
 }
@@ -74,5 +93,11 @@ void UTankAimingComponent::Move(FVector AimDirection)
 	//Move the Barrel
 	Barrel->Elevate(DeltaRotator.Pitch);
 	Turret->Rotate(DeltaRotator.Yaw);
+}
+
+bool UTankAimingComponent::isBarrelMoving()
+{
+	if (!ensure(Barrel)) return false;
+	return !AimDirection.Equals(Barrel->GetForwardVector(), 0.01);
 }
 
