@@ -18,21 +18,19 @@ class TANKS_API ATank : public APawn
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this pawn's properties
-	ATank();
-
-	UFUNCTION(BlueprintCallable, Category = Setup)
-		void SetBarrelReference(UTankBarrel* BarrelToSet);
-
-	UFUNCTION(BlueprintCallable, Category = Setup)
-		void SetTurretReference(UTankTurret* TurretToSet);
-
+	
 	void AimAt(FVector HitLocation);
 
 	UFUNCTION(BlueprintCallable, Category = Firing)
 		void Fire();
 
 private:
+	// Sets default values for this pawn's properties
+	ATank();
+
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+
 	//EditAnywhere - we can set property for every instance separately; EditDefaultsOnly - we can change property only for BP
 	UPROPERTY(EditAnywhere, Category = Firing)
 		float LaunchSpeed = 6000;
@@ -45,12 +43,7 @@ private:
 
 	UTankBarrel* Barrel = nullptr;
 
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
 protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
 
 	UPROPERTY(BlueprintReadOnly)
 	UTankAimingComponent* TankAimingComponent = nullptr;

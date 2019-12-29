@@ -29,11 +29,11 @@ public:
 	// Sets default values for this component's properties
 	UTankAimingComponent();
 
+	UFUNCTION(BlueprintCallable, Category = Setup)
+		void Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
+
 	UPROPERTY(EditDefaultsOnly)
 		bool bDrawDebugLine = false;
-
-	void SetBarrelReference(UTankBarrel* BarrelToSet);
-	void SetTurretReference(UTankTurret* TurretToSet);
 
 	void AimAt(FVector WorldSpaceAim, float LaunchSpeed);
 
