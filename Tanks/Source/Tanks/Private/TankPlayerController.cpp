@@ -13,19 +13,19 @@ void ATankPlayerController::BeginPlay()
 	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 	if (!ensure(AimingComponent)) return;
 	FoundAimingComponent(AimingComponent);
-	
 
 }
 
 void ATankPlayerController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	AimTowardsCrosshaid();
+	AimTowardsCrosshair();
 
 }
 
-void ATankPlayerController::AimTowardsCrosshaid()
+void ATankPlayerController::AimTowardsCrosshair()
 {
+	if (!GetPawn()) return; // e.g. if not possessing 
 	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 	if (!ensure(AimingComponent)) return;
 

@@ -29,6 +29,12 @@ public:
 
 private:
 
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
+		float TrackMaxDrivingFroce = 32000000; //40 000 000 for driffting 
+
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
+		bool MoreSlippery = false;
+
 	UTankTracks* LeftTrack = nullptr;
 	UTankTracks* RightTrack = nullptr;
 

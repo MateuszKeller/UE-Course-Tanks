@@ -8,7 +8,12 @@ void UTankMovementComponent::Initialise(UTankTracks* LeftTrackToSet, UTankTracks
 	if (!ensure(LeftTrackToSet && RightTrackToSet)) { return; }
 
 	LeftTrack = LeftTrackToSet;
+	LeftTrack->TrackMaxDrivingFroce = TrackMaxDrivingFroce;
+	LeftTrack->MoreSlippery = MoreSlippery;
+
 	RightTrack = RightTrackToSet;
+	RightTrack->TrackMaxDrivingFroce = TrackMaxDrivingFroce;
+	RightTrack->MoreSlippery = MoreSlippery;
 }
 
 void UTankMovementComponent::IntendMoveForward(float Throw)

@@ -27,7 +27,7 @@ protected:
 private:
 
 	//Move the tank barrel so thaht shot would hit where the crosshair intersects the world
-	void AimTowardsCrosshaid();
+	void AimTowardsCrosshair();
 
 	//True if hit landscape
 	bool GetSightRayHitLocation(FVector&) const;

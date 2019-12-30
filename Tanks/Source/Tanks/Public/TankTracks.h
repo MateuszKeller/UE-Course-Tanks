@@ -15,15 +15,19 @@ class TANKS_API UTankTracks : public UStaticMeshComponent
 	GENERATED_BODY()
 
 public:
-
+	
 	UFUNCTION(BlueprintCallable, Category = Input)
 		void SetThrottle(float Throttle);
 
 	//Max Force Per Tack (Newtons)
-	UPROPERTY(EditDefaultsOnly)
+	//UPROPERTY(EditDefaultsOnly)
 		float TrackMaxDrivingFroce = 32000000; //40 000 000 for driffting 
 
+	//UPROPERTY(EditDefaultsOnly)
+		bool MoreSlippery = false;
 
 private:
-	
+	UTankTracks();
+
+	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
 };
