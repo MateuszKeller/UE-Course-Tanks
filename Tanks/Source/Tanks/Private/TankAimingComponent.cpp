@@ -24,7 +24,11 @@ void UTankAimingComponent::BeginPlay()
 
 void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction * ThisTickFunction)
 {
-	if ((FPlatformTime::Seconds() - LastFireTime) < ReloadTimeInS)
+	if (Ammo < 1)
+	{
+		FiringState = EFiringState::NoAmmo;
+	}
+	else if ((FPlatformTime::Seconds() - LastFireTime) < ReloadTimeInS)
 	{
 		FiringState = EFiringState::Reloading;
 	}
@@ -66,7 +70,7 @@ void UTankAimingComponent::AimAt(FVector WorldSpaceAim)
 
 void UTankAimingComponent::Fire()
 {
-	if (FiringState!= EFiringState::Reloading)
+	if (FiringState == EFiringState::Aiming || FiringState == EFiringState::Locked)
 	{
 		if (!ensure(Barrel && ProjectileBP)) return;
 
@@ -77,6 +81,7 @@ void UTankAimingComponent::Fire()
 
 		Projectile->LaunchProjectile(LaunchSpeed);
 		LastFireTime = FPlatformTime::Seconds();
+		Ammo--;
 	}
 }
 
