@@ -26,10 +26,13 @@ void ATankAIController::Tick(float DeltaTime)
 	if (!ensure(AimingComponent)) return;
 		//GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
 	AimingComponent->AimAt(PlayerPawn->GetActorLocation());
-	//Fire if ready
-	AimingComponent->Fire();
-	
 
+	//Fire if ready
+	if (AimingComponent->GetFiringState() == EFiringState::Locked)
+	{
+		AimingComponent->Fire();
+	}
+	
 }
 
 APawn * ATankAIController::GetPlayerTank() const

@@ -23,6 +23,7 @@ public:
 private:
 	APawn* GetPlayerTank() const;
 
-	UPROPERTY(EditDefaultsOnly)
-	float AcceptanceRadius = 3000.f;
+protected:
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
+	float AcceptanceRadius = 8000.f;
 };
