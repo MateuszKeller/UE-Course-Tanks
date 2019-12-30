@@ -49,10 +49,10 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector &OutHitLocation) cons
 	if (GetLookDirection(CrosshairLocation, LookDirection))
 	{
 		//Line-trace along that LookDirection and see what we hit
-		GetLookVectorHitLocation(LookDirection, OutHitLocation);		
+		return GetLookVectorHitLocation(LookDirection, OutHitLocation);		
 	}
 
-	return true;
+	return false;
 }
 
 bool ATankPlayerController::GetLookDirection(FVector2D &CrosshairLocation, FVector &LookDirection) const

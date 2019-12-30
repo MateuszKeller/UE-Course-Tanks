@@ -92,7 +92,16 @@ void UTankAimingComponent::Move(FVector AimDirection)
 	//UE_LOG(LogTemp, Warning, TEXT("Delta Rotation: %s"), *DeltaRotator.ToString());
 	//Move the Barrel
 	Barrel->Elevate(DeltaRotator.Pitch);
-	Turret->Rotate(DeltaRotator.Yaw);
+	if (FMath::Abs(DeltaRotator.Yaw) < 180)
+	{
+		Turret->Rotate(DeltaRotator.Yaw);
+	}
+	else
+	{
+		Turret->Rotate(-DeltaRotator.Yaw);
+	}
+
+	
 }
 
 bool UTankAimingComponent::isBarrelMoving()
