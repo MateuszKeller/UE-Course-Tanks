@@ -32,7 +32,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Setup)
 		void Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditAnywhere, Category = Firing)
 		bool bDrawDebugLine = false;
 
 	void AimAt(FVector WorldSpaceAim);
@@ -44,7 +44,7 @@ public:
 	EFiringState GetFiringState() const { return FiringState; }
 
 	UFUNCTION(BlueprintCallable, Category = Firing)
-	int GetAmmo() const { return Ammo; }
+	int32 GetAmmo() const { return Ammo; }
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = Setup)
@@ -56,7 +56,7 @@ private:
 
 	virtual void BeginPlay() override;
 
-	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction * ThisTickFunction) override;
 
 	void Move(FVector AimDirection);
 
@@ -80,5 +80,5 @@ private:
 	double LastFireTime = 0;
 
 	UPROPERTY(EditDefaultsOnly, Category = Setup)
-	int Ammo = 5;
+	int32 Ammo = 5;
 };

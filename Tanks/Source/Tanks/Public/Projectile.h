@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "GameFramework/ProjectileMovementComponent.h"
+#include "Particles/ParticleSystemComponent.h"
+
 #include "Projectile.generated.h"
 
 
@@ -28,6 +30,13 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 private:
+	UPROPERTY(VisibleAnywhere, Category = Firing)
 	UProjectileMovementComponent* MovementComponent = nullptr;
+
+	UPROPERTY(VisibleAnywhere, Category = Components)
+	UStaticMeshComponent* CollisionMesh = nullptr;
+
+	UPROPERTY(VisibleAnywhere, Category = Components)
+	UParticleSystemComponent* LaunchBlast = nullptr;
 
 };
