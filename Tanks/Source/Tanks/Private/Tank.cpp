@@ -7,6 +7,8 @@
 #include "TankBarrel.h"
 
 
+float ATank::GetHealthPercent() const { return (float)CurrentHealt / (float)StartingHealth; }
+
 // Sets default values
 ATank::ATank()
 {
