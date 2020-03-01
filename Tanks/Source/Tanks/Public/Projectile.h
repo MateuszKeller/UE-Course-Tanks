@@ -30,9 +30,11 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
-	
 private:
+
+	void OnTimerExpire();
+	float DestroyDelay = 4.5f;
+
 	UPROPERTY(VisibleAnywhere, Category = Firing)
 	UProjectileMovementComponent* MovementComponent = nullptr;
 
