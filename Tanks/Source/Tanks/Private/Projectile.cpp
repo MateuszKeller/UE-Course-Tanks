@@ -22,6 +22,9 @@ AProjectile::AProjectile()
 
 	MovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(FName("Projectile Movement"));
 	MovementComponent->bAutoActivate = false;
+
+	ExplosionForce = CreateDefaultSubobject<URadialForceComponent>(FName("Expolsion Force"));
+	ExplosionForce->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 }
 
 void AProjectile::LaunchProjectile(float Speed)
@@ -42,6 +45,8 @@ void AProjectile::OnHit(UPrimitiveComponent * HitComponent, AActor * OtherActor,
 {
 	LaunchBlast->Deactivate();
 	ImpactBlast->Activate();
+		
+	ExplosionForce->FireImpulse();
 }
 
 
