@@ -79,6 +79,6 @@ private:
 	
 	double LastFireTime = 0;
 
-	UPROPERTY(EditDefaultsOnly, Category = Setup)
+	UPROPERTY(EditAnywhere, Category = Setup)
 	int32 Ammo = 5;
 };

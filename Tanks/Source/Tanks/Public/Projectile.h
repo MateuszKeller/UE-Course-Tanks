@@ -8,6 +8,8 @@
 #include "Components/StaticMeshComponent.h"
 #include "Particles/ParticleSystemComponent.h"
 #include "PhysicsEngine/RadialForceComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include "GameFramework/DamageType.h"
 
 #include "Projectile.generated.h"
 
@@ -34,6 +36,9 @@ private:
 
 	void OnTimerExpire();
 	float DestroyDelay = 4.5f;
+
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
+	float ProjectileDamage = 20.f;
 
 	UPROPERTY(VisibleAnywhere, Category = Firing)
 	UProjectileMovementComponent* MovementComponent = nullptr;
