@@ -30,7 +30,7 @@ class TANKS_API UTankAimingComponent : public UActorComponent
 public:	
 	
 	UFUNCTION(BlueprintCallable, Category = Setup)
-		void Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
+		void Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet, TSubclassOf<AProjectile> ProjectileToSet);
 
 	UPROPERTY(EditAnywhere, Category = Firing)
 		bool bDrawDebugLine = false;
@@ -80,5 +80,5 @@ private:
 	double LastFireTime = 0;
 
 	UPROPERTY(EditAnywhere, Category = Setup)
-	int32 Ammo = 5;
+	int32 Ammo = 15;
 };

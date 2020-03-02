@@ -42,12 +42,14 @@ void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 	}
 }
 
-void UTankAimingComponent::Initialise(UTankBarrel * BarrelToSet, UTankTurret * TurretToSet)
+void UTankAimingComponent::Initialise(UTankBarrel * BarrelToSet, UTankTurret * TurretToSet, TSubclassOf<AProjectile> ProjectileToSet)
 {
 	if (!ensure(BarrelToSet && TurretToSet)) { return; }
 
 	Barrel = BarrelToSet;
 	Turret = TurretToSet;
+	ProjectileBP = ProjectileToSet;
+
 }
 
 void UTankAimingComponent::AimAt(FVector WorldSpaceAim)

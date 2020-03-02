@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AIController.h"
+
 #include "TankAIController.generated.h"
 
 class UTankAimingComponent;
@@ -16,12 +17,16 @@ class TANKS_API ATankAIController : public AAIController
 {
 	GENERATED_BODY()
 	
-public:
+private:
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
 
-private:
 	APawn* GetPlayerTank() const;
+
+	virtual void SetPawn(APawn* InPawn) override; // called when Pawn is possessed
+
+	UFUNCTION()
+	void OnPossessedTankDeath(); // delegat method
 
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = Setup)

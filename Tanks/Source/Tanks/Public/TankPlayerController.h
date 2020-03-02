@@ -22,9 +22,14 @@ public:
 
 protected:
 	UFUNCTION(BlueprintImplementableEvent, Category = Setup)
-		void FoundAimingComponent(UTankAimingComponent* AimingCompRef);
+	void FoundAimingComponent(UTankAimingComponent* AimingCompRef);
 
 private:
+
+	virtual void SetPawn(APawn* InPawn) override; // called when Pawn is possessed
+
+	UFUNCTION()
+	void OnPossessedTankDeath();
 
 	//Move the tank barrel so thaht shot would hit where the crosshair intersects the world
 	void AimTowardsCrosshair();
